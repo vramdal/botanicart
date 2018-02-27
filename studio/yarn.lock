@@ -405,6 +405,20 @@
   dependencies:
     uuid "3.1.0"
 
+"@sanity/vision@^0.125.9":
+  version "0.125.9"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-0.125.9.tgz#fa849e0d8a79c5655656969de1d5bc12773cb8cc"
+  dependencies:
+    classnames "^2.2.5"
+    json-lexer "^1.1.1"
+    moment "^2.19.1"
+    query-string "^4.3.2"
+    react-codemirror2 "^1.0.0"
+    react-icon-base "^2.0.4"
+    react-json-inspector rexxars/react-json-inspector#react-15
+    react-spinner "^0.2.6"
+    react-split-pane "^0.1.63"
+
 "@sanity/webpack-integration@^0.125.8":
   version "0.125.8"
   resolved "https://registry.yarnpkg.com/@sanity/webpack-integration/-/webpack-integration-0.125.8.tgz#843ff9556f6cd74717a1c7c447f0ae74c2ab301f"
@@ -1608,6 +1622,10 @@ coa@~1.0.1:
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
+
+codemirror@5.29.0:
+  version "5.29.0"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.29.0.tgz#e68de1350e2f0ce804a3930576d0ae318736e967"
 
 color-convert@^1.3.0, color-convert@^1.8.2, color-convert@^1.9.0, color-convert@^1.9.1:
   version "1.9.1"
@@ -4763,7 +4781,7 @@ qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
-query-string@^4.1.0:
+query-string@^4.1.0, query-string@^4.3.2:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.4.tgz#bbb693b9ca915c232515b228b1a02b609043dbeb"
   dependencies:
@@ -4859,6 +4877,12 @@ react-click-outside@^2.3.1:
   dependencies:
     hoist-non-react-statics "^1.2.0"
 
+react-codemirror2@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-codemirror2/-/react-codemirror2-1.0.0.tgz#b529a6c5c91219f92c751f43a17721cdaf36b05f"
+  dependencies:
+    codemirror "5.29.0"
+
 react-container-query@^0.8.0:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/react-container-query/-/react-container-query-0.8.1.tgz#47da2239e9c2193654d47c435da9e95903d3d921"
@@ -4929,6 +4953,10 @@ react-icon-base@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-2.1.0.tgz#a196e33fdf1e7aaa1fda3aefbb68bdad9e82a79d"
 
+react-icon-base@^2.0.4:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-2.1.2.tgz#a17101dad9c1192652356096860a9ab43a0766c7"
+
 react-icons@^2.2.5:
   version "2.2.7"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.7.tgz#d7860826b258557510dac10680abea5ca23cf650"
@@ -4989,6 +5017,10 @@ react-sortable-hoc@^0.6.3:
     invariant "^2.2.1"
     lodash "^4.12.0"
     prop-types "^15.5.7"
+
+react-spinner@^0.2.6:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/react-spinner/-/react-spinner-0.2.7.tgz#ea3ca3375dd7a54edbb5cc01d17496a2e2fc14db"
 
 react-split-pane@^0.1.63:
   version "0.1.77"
