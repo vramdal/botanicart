@@ -1,9 +1,21 @@
 {
   "name": "botanicart.no-node",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "none",
+  "main": "build/index.js",
+  "license": "UNLICENSED",
   "dependencies": {
-    "@sanity/client": "^0.125.8"
+    "@sanity/client": "^0.125.8",
+    "next": "^5.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "styled-jsx": "^2.2.5"
+  },
+  "devDependencies": {
+    "flow-remove-types": "^1.2.3"
+  },
+  "scripts": {
+    "build": "flow-remove-types src/ -d build/",
+    "prepublish": "yarn run build",
+    "dev": "next"
   }
 }
