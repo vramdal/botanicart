@@ -1,0 +1,9 @@
+{
+  "name": "botanicart.no-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "none",
+  "dependencies": {
+    "@sanity/client": "^0.125.8"
+  }
+}
