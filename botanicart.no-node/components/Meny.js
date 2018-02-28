@@ -6,11 +6,10 @@ import Link from 'next/link';
 export default class Meny extends Component {
 
     render() {
-        console.log("this.props = ", this.props);
         return (
             <ul className="menu">
                 {this.props.menypunkter.map(menypunkt => <li key={menypunkt.slug} className={this.props.aktivSideSlug === menypunkt.slug ? 'active' : ''}>
-                    <Link href={menypunkt.slug}><a href={menypunkt.slug}>{menypunkt.menypunkttekst}</a></Link>
+                    <Link href={'/' + menypunkt.slug}><a>{menypunkt.menypunkttekst}</a></Link>
                 </li>)}
                 <style jsx>{`
                     ul.menu {

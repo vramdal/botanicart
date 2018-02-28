@@ -1,27 +1,39 @@
 import sanity from '../lib/sanity';
-const menyQuery = `*[_type=="side"] {
+const menyQuery = `*[_type=="side" && defined(menypunkttekst)] {
    menypunkttekst, 'slug': slug.current, tittel,
   "menypunkt": *[_type=='menypunkt' && references(^._id)]
 }`;
 
 
-export default WrappedPage =>
+export default (WrappedPage, queries) =>
     class extends React.Component {
-        static async getInitialProps({ pathname }) {
-            async function resolveQueries() {
-                if (WrappedPage.queries) {
-                    let results = {};
-                    Object.keys(WrappedPage.queries).forEach(key => {
-                        let query = WrappedPage.queries[key];
-                        results[key] = sanity.fetch(query)
-                    });
+        static async resolveQueries(queries) {
+            if (queries) {
+                async function queryResolver(key) {
+                    let query = queries[key];
+                    return new async function() {
+                        let queryResult = await sanity.fetch(query);
+                        return {key: key, result: queryResult};
+                    };
                 }
+
+                let keys = Object.keys(queries);
+                let resultMap = {};
+                await Promise.all(keys.map(queryResolver))
+                    .then(results => results.forEach(resultObj => {
+                        resultMap[resultObj.key] = resultObj.result;
+                    }));
+                return resultMap;
             }
+        }
+        static async getInitialProps({ pathname, asPath, res }) {
+            // https://github.com/sanity-io/block-content-to-react
+            console.log("res = ", res);
             return {
-                menypunkter: await sanity.fetch(menyQuery), pathname, queryResults: await resolveQueries()
+                menypunkter: await sanity.fetch(menyQuery), pathname, ...await this.resolveQueries(queries), path: asPath, fisk: res.fisk
             }
         }
         render() {
-            return <WrappedPage pathname={this.props.pathname} menypunkter={this.props.menypunkter} queryResults={this.props.queryResults}/>
+            return <WrappedPage {...this.props}/>
         }
     }

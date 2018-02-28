@@ -2,6 +2,21 @@
 # yarn lockfile v1
 
 
+"@sanity/block-content-to-hyperscript@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@sanity/block-content-to-hyperscript/-/block-content-to-hyperscript-1.2.8.tgz#b942018c27f0764249d0c416dadc749dcd44ef7e"
+  dependencies:
+    "@sanity/generate-help-url" "^0.123.0"
+    hyperscript "^2.0.2"
+    object-assign "^4.1.1"
+
+"@sanity/block-content-to-react@^1.3.5":
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/@sanity/block-content-to-react/-/block-content-to-react-1.3.5.tgz#c135f6891a1facee88f84d27c7c78761fe132f6a"
+  dependencies:
+    "@sanity/block-content-to-hyperscript" "^1.2.8"
+    prop-types "^15.5.10"
+
 "@sanity/client@^0.125.8":
   version "0.125.8"
   resolved "https://registry.yarnpkg.com/@sanity/client/-/client-0.125.8.tgz#bffa5f3b55f04d370148ff7420fe77c7f5cfc8ec"
@@ -20,6 +35,10 @@
   dependencies:
     eventsource "^1.0.5"
     eventsource-polyfill "^0.9.6"
+
+"@sanity/generate-help-url@^0.123.0":
+  version "0.123.0"
+  resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-0.123.0.tgz#a9e1a3b59c6f8b316ca5092c2a9f48b0efe6807c"
 
 "@sanity/generate-help-url@^0.125.8":
   version "0.125.8"
@@ -889,6 +908,10 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
+browser-split@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/browser-split/-/browser-split-0.0.0.tgz#41419caef769755929dd518967d3eec0a6262771"
+
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/browserify-aes/-/browserify-aes-1.1.1.tgz#38b7ab55edb806ff2dcda1a7f1620773a477c49f"
@@ -1083,6 +1106,12 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
+
+class-list@~0.1.0, class-list@~0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/class-list/-/class-list-0.1.1.tgz#9b9745192c4179b5da0a0d7633658e3c70d796cb"
+  dependencies:
+    indexof "0.0.1"
 
 cli-boxes@^1.0.0:
   version "1.0.0"
@@ -2071,6 +2100,12 @@ hosted-git-info@^2.1.4:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
 
+html-element@^2.0.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/html-element/-/html-element-2.2.0.tgz#c3c1ff88c261db74d0af6391eef90c346f900730"
+  dependencies:
+    class-list "~0.1.1"
+
 html-entities@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
@@ -2103,6 +2138,14 @@ http-status@1.0.1:
 https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
+
+hyperscript@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/hyperscript/-/hyperscript-2.0.2.tgz#3839cba45554bdfe27bb81c2142d1684f8135af5"
+  dependencies:
+    browser-split "0.0.0"
+    class-list "~0.1.0"
+    html-element "^2.0.0"
 
 iconv-lite@~0.4.13:
   version "0.4.19"
@@ -3129,7 +3172,7 @@ prop-types@15.6.0:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prop-types@^15.6.0:
+prop-types@^15.5.10, prop-types@^15.6.0:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
