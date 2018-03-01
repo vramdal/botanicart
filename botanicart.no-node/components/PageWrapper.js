@@ -28,9 +28,8 @@ export default (WrappedPage, queries) =>
         }
         static async getInitialProps({ pathname, asPath, res }) {
             // https://github.com/sanity-io/block-content-to-react
-            console.log("res = ", res);
             return {
-                menypunkter: await sanity.fetch(menyQuery), pathname, ...await this.resolveQueries(queries), path: asPath, fisk: res.fisk
+                menypunkter: await sanity.fetch(menyQuery), pathname, ...await this.resolveQueries(queries), path: asPath, pageContent: res.resolvedContent.page
             }
         }
         render() {
