@@ -22,10 +22,13 @@ export default class Layout extends React.Component {
                 <h1><a href="."><img src="static/logo.png"/></a></h1>
                 <Meny menypunkter={this.props.menypunkter}/>
                 <h2 style={{color: 'red'}}>{this.props.pathname}</h2>
+                <div className="content">
                 {this.props.children}
-                <p>Kult!</p>
+                </div>
+                {/*<p>Kult!</p>*/}
 
                 <style jsx>{styles}</style>
+
                 <style jsx global>{globalStyles}</style>
             </div>
         )

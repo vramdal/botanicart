@@ -10,6 +10,7 @@ export default {
             of: [
                 {
                     title: 'Bilde',
+                    name: 'bilde',
                     type: 'reference',
                     to: [{type: 'tegning'}]
                 }

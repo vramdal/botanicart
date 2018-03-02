@@ -2,9 +2,7 @@ const sanity = require('./lib/sanity');
 
 const { parse } = require('url');
 
-const pageQuery = `*[_type=="side" && slug.current == $slug] {
-    'slug': slug.current, tittel, tekst
-}`;
+const pageQuery = `*[_type=="side" && slug.current == $slug][0] {'slug': slug.current, tittel, tekst[]{..., 'bilder': bilder[]->{...}}}`;
 
 async function resolvePage(req) {
     const parsedUrl = parse(req.url, true);
@@ -12,7 +10,10 @@ async function resolvePage(req) {
 
     let slug = /\/(.*)/.exec(pathname)[1];
 
+    //sanity.listen(pageQuery, {slug}).subscribe(page => console.log("page updated = ", page));
+
     return await sanity.fetch(pageQuery, {slug});
+
 }
 
 module.exports = resolvePage;

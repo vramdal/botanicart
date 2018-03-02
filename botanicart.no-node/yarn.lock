@@ -44,6 +44,10 @@
   version "0.125.8"
   resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-0.125.8.tgz#2937dd144212946b860ab4fb1227be20d7d81b1b"
 
+"@sanity/image-url@^0.125.8":
+  version "0.125.8"
+  resolved "https://registry.yarnpkg.com/@sanity/image-url/-/image-url-0.125.8.tgz#92cfd468b77a0f330fb957ca45b76f491c05420f"
+
 "@sanity/observable@^0.125.8":
   version "0.125.8"
   resolved "https://registry.yarnpkg.com/@sanity/observable/-/observable-0.125.8.tgz#fad330533eddb7ef2a3af82e6187ba2b737200bc"
