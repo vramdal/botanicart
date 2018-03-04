@@ -19,7 +19,7 @@ export default class Meny extends Component {
                     li.active {
                         background: url(static/kvitveis-markor.png) no-repeat left top;
                     }
-                    @media screen and (max-width: 900px) {
+                    //@media screen and (max-width: 900px) {
 ul.menu li {
     margin-right: 0.5em;
 }
@@ -31,7 +31,7 @@ ul.menu li {
     /* font-weight: bold; */
     padding-left: 20px;
     font-family: 'HarabaraHand', sans-serif;
-}
+//}
 }
     `}</style>
             </ul>

@@ -12,7 +12,7 @@ export default css`
     }
 
     body.frontpage, body.has-article {
-        background: url(bilder/caprifol-bakgrunn.png), url(bilder/rognebaer-bakgrunn.png), url(bilder/whitey-bakgrunn.png);
+        background: url(static/caprifol-bakgrunn.png), url(static/rognebaer-bakgrunn.png), url(static/whitey-bakgrunn.png);
         min-height: 750px;
         background-repeat: no-repeat, no-repeat, repeat;
         background-position: 80% 50px, 20% 100px, left top;

@@ -11,6 +11,18 @@ export default class Layout extends React.Component {
         return (
             <div>
                 <Head>
+                    <link rel="icon" href="static/kvitveis-markor.png" type="image/png"/>
+                    {this.props.aktivSideSlug === '' &&
+                    <style>{`
+                    html body {
+                      background: url(static/caprifol-bakgrunn.png), url(static/rognebaer-bakgrunn.png), url(static/whitey-bakgrunn.png);
+                      min-height: 750px;
+                      background-repeat: no-repeat, no-repeat, repeat;
+                      background-position: 80% 50px, 20% 100px, left top;
+                }
+                `}
+                    </style>
+                    }
 {/*
 
                     <meta charSet="utf-8" />
@@ -19,9 +31,10 @@ export default class Layout extends React.Component {
 
 */}
                 </Head>
+                <h1>{this.props.pathname}</h1>
                 <h1><a href="."><img src="static/logo.png"/></a></h1>
                 <Meny menypunkter={this.props.menypunkter}/>
-                <h2 style={{color: 'red'}}>{this.props.pathname}</h2>
+                <h2 style={{color: 'red'}}>{this.props.aktivSideSlug}</h2>
                 <div className="content">
                 {this.props.children}
                 </div>

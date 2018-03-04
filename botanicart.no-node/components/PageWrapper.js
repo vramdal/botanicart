@@ -29,10 +29,12 @@ export default (WrappedPage, queries) =>
         static async getInitialProps({ pathname, asPath, res }) {
             // https://github.com/sanity-io/block-content-to-react
             return {
-                menypunkter: await sanity.fetch(menyQuery), pathname, ...await this.resolveQueries(queries), path: asPath, pageContent: res.resolvedContent.page
+                menypunkter: await sanity.fetch(menyQuery), pathname, ...await this.resolveQueries(queries), path: asPath, pageContent: res.resolvedContent.page,
+                aktivSideSlug: res.resolvedContent.page.slug
+
             }
         }
         render() {
-            return <WrappedPage {...this.props}/>
+            return <WrappedPage {...this.props} aktivSideSlug={this.props.aktivSideSlug}/>
         }
     }

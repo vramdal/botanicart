@@ -16,9 +16,10 @@ storiesOf('Button', module)
 
 storiesOf('Slideshow', module)
     .add('with 3 boxes', () => (
-        <Slideshow>
-            <div style={{width: 100, height: 100, backgroundColor: 'blue'}}/>
-            <div style={{width: 100, height: 100, backgroundColor: 'red'}}/>
+        <Slideshow slides={[
+            <div style={{width: 100, height: 100, backgroundColor: 'blue'}}/>,
+            <div style={{width: 100, height: 100, backgroundColor: 'red'}}/>,
             <div style={{width: 100, height: 100, backgroundColor: 'green'}}/>
+            ]}>
         </Slideshow>)
     );
