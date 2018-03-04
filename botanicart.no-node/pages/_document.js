@@ -10,7 +10,6 @@ export default class MyDocument extends Document {
     }
 
     render() {
-        console.log("this.props = ", this.props);
         return (
             <html>
             <Head>

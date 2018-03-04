@@ -11,7 +11,7 @@ export default class Slideshow extends Component {
     }
 
     componentDidMount() {
-        this.eventListener = this.slideshowElement.addEventListener("transitionend", (evt) => {
+        this.eventListener = this._root.addEventListener("transitionend", (evt) => {
             console.log("transitionend", evt.target, window.getComputedStyle(evt.target).opacity, this.state.currentImageIdx);
             if (window.getComputedStyle(evt.target).opacity === "1") {
                 evt.target.classList.add("visibleSlide");
@@ -23,7 +23,7 @@ export default class Slideshow extends Component {
                 evt.target.classList.add("invisibleSlide");
                 evt.target.classList.remove("visibleSlide");
                 evt.target.classList.remove("fadeout");
-                let numSlides = this.slideshowElement.querySelectorAll(".slide").length;
+                let numSlides = this._root.querySelectorAll(".slide").length;
                 let nyCurrentImageIdx = (this.state.currentImageIdx + 1 >= numSlides) ? 0 : this.state.currentImageIdx + 1;
                 this.setState({currentImageIdx: (nyCurrentImageIdx)});
             }
@@ -34,6 +34,7 @@ export default class Slideshow extends Component {
 
     }
 
+    //noinspection JSUnusedLocalSymbols
     componentDidUpdate(prevProps, prevState) {
         if (prevState.currentImageIdx !== this.state.currentImageIdx) {
             this.currentSlideElement.classList.add("fadein");
@@ -42,11 +43,11 @@ export default class Slideshow extends Component {
     }
 
     componentWillUnmount() {
-        this.slideshowElement.removeEventListener("transitionend", this.eventListener);
+        this._root.removeEventListener("transitionend", this.eventListener);
     }
 
     render() {
-        return (<div className={classnames("slideshow", this.props.className)} ref={el => this.slideshowElement = el} style={this.props.style}>
+        return (<div className={classnames("slideshow", this.props.className)} ref={el => this._root = el} style={this.props.style}>
             {this.props.slides.map((child, idx) =>
                 <div className={classnames("slide", this.props.slidesClassName, {"invisibleSlide": this.state.currentImageIdx !== idx})}
                      key={"slide-" + idx}

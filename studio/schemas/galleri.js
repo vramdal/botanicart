@@ -1,8 +1,17 @@
 export default {
     name: 'galleri',
-    title: 'Galleri',
+    title: 'Bildeliste',
     type: 'object',
     fields: [
+        {
+            name: "presentation",
+            title: "Presentasjon",
+            type: 'string',
+            options: {
+                list: ['slideshow', 'galleri']
+            }
+
+        },
         {
             name: 'bilder',
             title: "Bilder",
@@ -16,5 +25,11 @@ export default {
                 }
             ]
         }
-    ]
+    ],
+    preview: {
+        select: {
+            title: 'type'
+        }
+    }
+
 }
