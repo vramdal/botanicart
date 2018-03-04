@@ -30,11 +30,11 @@ export default (WrappedPage, queries) =>
             // https://github.com/sanity-io/block-content-to-react
             return {
                 menypunkter: await sanity.fetch(menyQuery), pathname, ...await this.resolveQueries(queries), path: asPath, pageContent: res.resolvedContent.page,
-                aktivSideSlug: res.resolvedContent.page.slug
-
+                aktivSideSlug: res.resolvedContent.page.slug,
+                bodyClass: (res.resolvedContent.page.slug) === '' ? 'forside' : undefined
             }
         }
         render() {
-            return <WrappedPage {...this.props} aktivSideSlug={this.props.aktivSideSlug}/>
+            return <WrappedPage {...this.props} aktivSideSlug={this.props.aktivSideSlug} bodyClass={this.props.bodyClass}/>
         }
     }
