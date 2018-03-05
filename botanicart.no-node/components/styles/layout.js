@@ -1,17 +1,25 @@
 import css from 'styled-jsx/css'
 
 export default css`
-@media screen and (max-width: 900px)
+
 .content {
-    width: 90%;
-    max-width: 600px;
+  margin: auto;
 }
-@media screen and (min-device-width: 800px)
-.content {
-     min-width: 500px;
+
+@media screen and (max-width: 800px) {
+  :global(.content) {
+      width: 90%;
+      max-width: 600px;
+  }
 }
-.content {
+@media screen and (min-width: 800px) {
+
+  :global(body.forside .content) {
     width: 50%;
-    margin: 0 auto;
+  }
+  
+  :global(body.forside .slide img) {
+    max-width: 400px;
+  } 
 }
 `

@@ -23,18 +23,11 @@ export default class Layout extends React.Component {
                 `}
                     </style>
                     }
-{/*
-
-                    <meta charSet="utf-8" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <title>Sanity + Next.js = 💖</title>
-
-*/}
                 </Head>
                 <h1>{this.props.pathname}</h1>
                 <h1><a href="."><img src="static/logo.png"/></a></h1>
                 <Meny menypunkter={this.props.menypunkter}/>
-                <h2 style={{color: 'red'}}>{this.props.aktivSideSlug}</h2>
+                {/*<h2 style={{color: 'red'}}>{this.props.aktivSideSlug}</h2>*/}
                 <div className="content">
                 {this.props.children}
                 </div>

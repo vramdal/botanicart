@@ -14,12 +14,13 @@
     "styled-jsx": "^2.2.5"
   },
   "devDependencies": {
-    "flow-remove-types": "^1.2.3",
-    "@storybook/react": "^3.3.14",
     "@storybook/addon-actions": "^3.3.14",
+    "@storybook/addon-knobs": "^3.3.14",
     "@storybook/addon-links": "^3.3.14",
     "@storybook/addons": "^3.3.14",
-    "babel-core": "^6.26.0"
+    "@storybook/react": "^3.3.14",
+    "babel-core": "^6.26.0",
+    "flow-remove-types": "^1.2.3"
   },
   "scripts": {
     "dev": "node next-server.js",

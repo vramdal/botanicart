@@ -4,13 +4,13 @@
 
 // https://github.com/zeit/next.js/#custom-server-and-routing
 
-const { createServer } = require('http')
-const { parse } = require('url')
-const next = require('next')
+const { createServer } = require('http');
+const { parse } = require('url');
+const next = require('next');
 
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 const resolvePage = require ('./PageResolve');
 
 app.prepare().then(() => {
@@ -21,13 +21,12 @@ app.prepare().then(() => {
 
         // Be sure to pass `true` as the second argument to `url.parse`.
         // This tells it to parse the query portion of the URL.
-        const parsedUrl = parse(req.url, true)
+        const parsedUrl = parse(req.url, true);
         const { pathname, query } = parsedUrl;
 
         let parts = pathname.substring(1).split("/");
         if (parts.length < 2) { // page
             resolvePage(req).then((pageContent) => {
-                console.log("page " + req.url + ": ", pageContent);
                 let extendedResponse = Object.assign(res, {resolvedContent: {page: pageContent}});
                 app.render(req, extendedResponse, '/default-template', query, {pathname, pageContent});
             });

@@ -23,26 +23,10 @@ export default class Gallery extends Component {
         return (<ul className={classnames("gallery", this.props.className)} ref={el => this._root = el} style={this.props.style}>
             {this.props.frames.map((frame, idx) =>
                 <li className={classnames("gallery-image-holder", this.props.framesClassName)} key={"frame-" + idx}>
-                    <a href={`#frame-${idx}`}>
-                        {frame}
-                    </a>
+                    {frame}
                 </li>)}
             {this.props.children}
             <style jsx>{`
-                li {
-                    display: inline-block;
-                    margin: 1em;
-                    border: 2px solid transparent;
-                    padding: 2px;
-                    cursor: pointer;
-                }
-                li a {
-                   text-decoration: inherit;
-                   color: inherit;
-                }
-                li a img {
-                    border: none;
-                }
             `}</style>
         </ul>);
     }

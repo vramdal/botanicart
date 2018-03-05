@@ -16,7 +16,6 @@ export default class MyDocument extends Document {
                 <style>{`body { margin: 0 } /* custom! */`}</style>
             </Head>
             <body className={this.props.__NEXT_DATA__.props.bodyClass}>
-            {this.props.customValue}
             <Main />
             <NextScript />
             </body>
