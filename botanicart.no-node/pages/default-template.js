@@ -74,15 +74,23 @@ class Index extends React.Component {
                                             <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
                                         </p>
                                         <div className={'lightbox-content'}>
-                                            <div className={'lightbox-controls-row'}>
-                                                <div className={'close-button'} onClick={this.closeLightbox}>
-                                                X
-                                                </div>
+                                            <div className={'lightbox-controls lightbox-controls-left'}>
+                                                <span className={'button'}>&lt;</span>
                                             </div>
-                                            <img key={bilde._id} src={builder.image(bilde.image).url()}/>
-                                            <p className={"lightbox-image-caption"}>{bilde.name}
-                                                <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
-                                            </p>
+                                            <div className={'lightbox-center-column'}>
+                                                <div className={'lightbox-controls lightbox-controls-row'}>
+                                                    <div className={'close-button'} onClick={this.closeLightbox}>
+                                                        X
+                                                    </div>
+                                                </div>
+                                                <img key={bilde._id} src={builder.image(bilde.image).url()}/>
+                                                <p className={"lightbox-image-caption"}>{bilde.name}
+                                                    <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
+                                                </p>
+                                            </div>
+                                            <div className={'lightbox-controls lightbox-controls-right'}>
+                                                <span className={'button'}>&gt;</span>
+                                            </div>
 
                                         </div>
                                     </React.Fragment>
@@ -124,7 +132,7 @@ class Index extends React.Component {
 
 		.lightbox-content {
 			display: none;
-			flex-direction: column;
+			flex-direction: row;
 			flex-shrink: 1;
 			flex-grow: 1;
 			height: 100vh;
@@ -134,6 +142,24 @@ class Index extends React.Component {
 			top: 0;
 			left: 0;
 			width: 100%;
+		}
+
+		.lightbox-content .lightbox-center-column {
+		    display: flex;
+			flex-direction: column;
+			flex-shrink: 1;
+			flex-grow: 1;
+			height: 100%;
+			width: 100%;
+		}
+
+		.lightbox-content .lightbox-controls-left, .lightbox-content .lightbox-controls-right {
+		   width: 1em;
+		   display: flex;
+		   flex-direction: column;
+		   justify-content: center;
+		   font-size: 18pt;
+		   font-weight: bold;
 		}
 
 		.lightbox-content .lightbox-controls-row {
@@ -147,7 +173,15 @@ class Index extends React.Component {
 		  padding: 1em;
 		}
 
-		.lightbox-content .lightbox-controls-row:hover {
+		.lightbox-content .lightbox-controls-left {
+		  background: linear-gradient(to right, lightgray, transparent);
+		}
+
+		.lightbox-content .lightbox-controls-right {
+		  background: linear-gradient(to left, lightgray, transparent);
+		}
+
+		.lightbox-content .lightbox-controls-row:hover, .lightbox-content .lightbox-controls-left:hover, .lightbox-content .lightbox-controls-right:hover {
 		  color: white;
 		  background: black;
 		  transition: background 1s;
