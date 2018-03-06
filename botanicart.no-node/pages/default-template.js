@@ -17,7 +17,8 @@ class Index extends React.Component {
 
     constructor() {
         super();
-        this.state = {fullsizeImageIdxShowing : undefined}
+        this.state = {fullsizeImageIdxShowing : undefined};
+        this.closeLightbox = this.closeLightbox.bind(this);
     }
 
     serializers(){
@@ -33,7 +34,7 @@ class Index extends React.Component {
                         return (
                             <Slideshow key={props.node._key}
                                        className="image-frame" slidesClassName={"forside-slide"} displayMs={5000}
-                                       slides={props.node.bilder.map((bilde, idx) => (
+                                       slides={props.node.bilder.map((bilde) => (
                                            <React.Fragment>
                                                <img key={bilde._id} src={builder.image(bilde.image).width(600).ignoreImageParams().fit("clip").url()}/>
                                                <p className={"image-caption"}>{bilde.name}</p>
@@ -63,17 +64,21 @@ class Index extends React.Component {
                             </Slideshow>
                         );
                     } else if (props.node.presentation === 'galleri') {
-                        const fullsizeImages = props.node.bilder.map(bilde => builder.image(bilde.image).height(300).url());
                         return (
                             <React.Fragment>
                                 <Gallery className={'galleri'} onGalleryFrameSelect={this.onGalleryFrameSelect.bind(this)} framesClassName={'galleri-bilde'} key={props.node._key}
-                                         frames={props.node.bilder.map((bilde, idx) => (
+                                         frames={props.node.bilder.map((bilde) => (
                                     <React.Fragment key={bilde.slug.current}>
                                         <img key={bilde._id} src={builder.image(bilde.image).height(150).url()}/>
                                         <p className={"image-caption"}>{bilde.name}
                                             <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
                                         </p>
                                         <div className={'lightbox-content'}>
+                                            <div className={'lightbox-controls-row'}>
+                                                <div className={'close-button'} onClick={this.closeLightbox}>
+                                                X
+                                                </div>
+                                            </div>
                                             <img key={bilde._id} src={builder.image(bilde.image).url()}/>
                                             <p className={"lightbox-image-caption"}>{bilde.name}
                                                 <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
@@ -131,13 +136,30 @@ class Index extends React.Component {
 			width: 100%;
 		}
 
+		.lightbox-content .lightbox-controls-row {
+		  display: flex;
+		  flex-direction: row;
+		  justify-content: flex-end;
+		  height: 1em;
+		  box-sizing: content-box;
+		  background: linear-gradient(lightgray, transparent);
+		  color: lightgray;
+		  padding: 1em;
+		}
+
+		.lightbox-content .lightbox-controls-row:hover {
+		  color: white;
+		  background: black;
+		  transition: background 1s;
+		}
+
 		.lightbox-content img {
 			flex-shrink: 2;
+			flex-grow: 0;
 			object-fit: scale-down;
 			display: block;
 			max-width: 100%;
 			width: 100%;
-			height: auto;
 			max-height: 100%;
 		}
 
@@ -180,6 +202,13 @@ class Index extends React.Component {
     onGalleryFrameSelect(frame, idx) {
         console.log("Index.onGalleryFrameSelect", arguments);
         this.setState({fullsizeImageIdxShowing : idx});
+    }
+
+    closeLightbox() {
+        window.setTimeout(() => {
+            window.location.hash = "";
+        }, 1);
+
     }
 
     componentDidMount() {
