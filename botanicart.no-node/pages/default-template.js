@@ -14,6 +14,12 @@ const builder = imageUrlBuilder(santiyClient);
 
 class Index extends React.Component {
 
+
+    constructor() {
+        super();
+        this.state = {fullsizeImageIdxShowing : undefined}
+    }
+
     serializers(){
 
         return {
@@ -57,16 +63,26 @@ class Index extends React.Component {
                             </Slideshow>
                         );
                     } else if (props.node.presentation === 'galleri') {
+                        const fullsizeImages = props.node.bilder.map(bilde => builder.image(bilde.image).height(300).url());
                         return (
-                            <Gallery className={'galleri'} onGalleryFrameSelect={this.onGalleryFrameSelect.bind(this)} framesClassName={'galleri-bilde'} key={props.node._key} frames={props.node.bilder.map((bilde, idx) => (
-                                <React.Fragment key={bilde.slug.current}>
-                                    <img key={bilde._id} src={builder.image(bilde.image).height(150).url()}/>
-                                    <p className={"image-caption"}>{bilde.name}
-                                        <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
-                                    </p>
-                                </React.Fragment>
-                            ))}>
-                                <style jsx>{`
+                            <React.Fragment>
+                                <Gallery className={'galleri'} onGalleryFrameSelect={this.onGalleryFrameSelect.bind(this)} framesClassName={'galleri-bilde'} key={props.node._key}
+                                         frames={props.node.bilder.map((bilde, idx) => (
+                                    <React.Fragment key={bilde.slug.current}>
+                                        <img key={bilde._id} src={builder.image(bilde.image).height(150).url()}/>
+                                        <p className={"image-caption"}>{bilde.name}
+                                            <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
+                                        </p>
+                                        <div className={'lightbox-content'}>
+                                            <img key={bilde._id} src={builder.image(bilde.image).url()}/>
+                                            <p className={"lightbox-image-caption"}>{bilde.name}
+                                                <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
+                                            </p>
+
+                                        </div>
+                                    </React.Fragment>
+                                ))}>
+                                    <style jsx>{`
                   :global(.galleri) {
                     display: flex;
                     flex-direction: row;
@@ -97,10 +113,48 @@ class Index extends React.Component {
                   :global(.content) {
                     width: 100%;
                   }
+        :global(li:target .lightbox-content) {
+          display: flex;
+        }
+
+		.lightbox-content {
+			display: none;
+			flex-direction: column;
+			flex-shrink: 1;
+			flex-grow: 1;
+			height: 100vh;
+			max-height: 100vh;
+			position: fixed;
+			background-image: url(static/whitey-bakgrunn.png);
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+
+		.lightbox-content img {
+			flex-shrink: 2;
+			object-fit: scale-down;
+			display: block;
+			max-width: 100%;
+			width: 100%;
+			height: auto;
+			max-height: 100%;
+		}
+
+		.lightbox-content p {
+			flex-grow: 2;
+			flex-shrink: 0;
+			flex-basis: content;
+			margin: 0;
+			padding: 1em;
+		}
+
 
                     `}
-                                </style>
-                            </Gallery>
+                                    </style>
+
+                                </Gallery>
+                            </React.Fragment>
                         )
                     } else {
                         console.log("this.props = ", this.props);
@@ -123,8 +177,9 @@ class Index extends React.Component {
         </Layout>);
     }
 
-    onGalleryFrameSelect(frame) {
+    onGalleryFrameSelect(frame, idx) {
         console.log("Index.onGalleryFrameSelect", arguments);
+        this.setState({fullsizeImageIdxShowing : idx});
     }
 
     componentDidMount() {

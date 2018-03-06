@@ -24,16 +24,21 @@ export default class Gallery extends Component {
         return (<ul className={classnames("gallery", this.props.className)} ref={el => this._root = el} style={this.props.style}>
             {this.props.frames.map((frame, idx) =>
                 <li id={`frame-${frame.key}`} className={classnames("gallery-image-holder", this.props.framesClassName)} key={"frame-" + idx}
+                    onClick={() => this.props.onGalleryFrameSelect(frame, idx)}
                 >
                     <a href={`#frame-${frame.key}`} key={`link-${frame.key}`}>
                         {frame}
                     </a>
+{/*
+
                     <div className="gallery-image-fullsize-holder">
                         <img src="https://lh3.googleusercontent.com/-UCNCsoIsbps/UDvqoWoZs_I/AAAAAAAARZM/rTTBnwD0rO4xXSFGexLVjxZj7FT0sYzbwCHMYBhgL/s800/gulteple.png"
                              alt="Malus - gult eple"/>
                         <br/>
                         <span className="gallery-image-fullsize-caption">Malus - gult eple</span>
                     </div>
+
+*/}
                 </li>)}
             {this.props.children}
             <style jsx>{`
