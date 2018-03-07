@@ -24,7 +24,7 @@ export default class Gallery extends Component {
         return (<ul className={classnames("gallery", this.props.className)} ref={el => this._root = el} style={this.props.style}>
             {this.props.frames.map((frame, idx) =>
                 <li id={`frame-${frame.key}`} className={classnames("gallery-image-holder", this.props.framesClassName)} key={"frame-" + idx}
-                    onClick={() => this.props.onGalleryFrameSelect(frame, idx)}
+                    onClick={() => this.props.onGalleryFrameSelect(frame, idx, this.props.frames.length)}
                 >
                     <a href={`#frame-${frame.key}`} key={`link-${frame.key}`}>
                         {frame}

@@ -3,12 +3,12 @@
 import Layout from '../components/Layout';
 import PageWrapper from '../components/PageWrapper';
 import BlockContent from '@sanity/block-content-to-react';
-import santiyClient from '../lib/sanity';
-import imageUrlBuilder from '@sanity/image-url'
 import Slideshow from '../components/Slideshow';
 import Head from "next/head";
 import Gallery from "../components/Gallery";
-
+import Lightbox from "../components/Lightbox";
+import imageUrlBuilder from '@sanity/image-url'
+import santiyClient from '../lib/sanity';
 const builder = imageUrlBuilder(santiyClient);
 
 
@@ -67,32 +67,13 @@ class Index extends React.Component {
                         return (
                             <React.Fragment>
                                 <Gallery className={'galleri'} onGalleryFrameSelect={this.onGalleryFrameSelect.bind(this)} framesClassName={'galleri-bilde'} key={props.node._key}
-                                         frames={props.node.bilder.map((bilde) => (
+                                         frames={props.node.bilder.map((bilde, idx) => (
                                     <React.Fragment key={bilde.slug.current}>
                                         <img key={bilde._id} src={builder.image(bilde.image).height(150).url()}/>
                                         <p className={"image-caption"}>{bilde.name}
                                             <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
                                         </p>
-                                        <div className={'lightbox-content'}>
-                                            <div className={'lightbox-controls lightbox-controls-left'}>
-                                                <span className={'button'}>&lt;</span>
-                                            </div>
-                                            <div className={'lightbox-center-column'}>
-                                                <div className={'lightbox-controls lightbox-controls-row'}>
-                                                    <div className={'close-button'} onClick={this.closeLightbox}>
-                                                        X
-                                                    </div>
-                                                </div>
-                                                <img key={bilde._id} src={builder.image(bilde.image).url()}/>
-                                                <p className={"lightbox-image-caption"}>{bilde.name}
-                                                    <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
-                                                </p>
-                                            </div>
-                                            <div className={'lightbox-controls lightbox-controls-right'}>
-                                                <span className={'button'}>&gt;</span>
-                                            </div>
-
-                                        </div>
+                                        {idx === 0 && <Lightbox bilde={bilde}/>}
                                     </React.Fragment>
                                 ))}>
                                     <style jsx>{`
@@ -126,90 +107,14 @@ class Index extends React.Component {
                   :global(.content) {
                     width: 100%;
                   }
-        :global(li:target .lightbox-content) {
-          display: flex;
-        }
 
-		.lightbox-content {
-			display: none;
-			flex-direction: row;
-			flex-shrink: 1;
-			flex-grow: 1;
-			height: 100vh;
-			max-height: 100vh;
-			position: fixed;
-			background-image: url(static/whitey-bakgrunn.png);
-			top: 0;
-			left: 0;
-			width: 100%;
-		}
-
-		.lightbox-content .lightbox-center-column {
-		    display: flex;
-			flex-direction: column;
-			flex-shrink: 1;
-			flex-grow: 1;
-			height: 100%;
-			width: 100%;
-		}
-
-		.lightbox-content .lightbox-controls-left, .lightbox-content .lightbox-controls-right {
-		   width: 1em;
-		   display: flex;
-		   flex-direction: column;
-		   justify-content: center;
-		   font-size: 18pt;
-		   font-weight: bold;
-		}
-
-		.lightbox-content .lightbox-controls-row {
-		  display: flex;
-		  flex-direction: row;
-		  justify-content: flex-end;
-		  height: 1em;
-		  box-sizing: content-box;
-		  background: linear-gradient(lightgray, transparent);
-		  color: lightgray;
-		  padding: 1em;
-		}
-
-		.lightbox-content .lightbox-controls-left {
-		  background: linear-gradient(to right, lightgray, transparent);
-		}
-
-		.lightbox-content .lightbox-controls-right {
-		  background: linear-gradient(to left, lightgray, transparent);
-		}
-
-		.lightbox-content .lightbox-controls-row:hover, .lightbox-content .lightbox-controls-left:hover, .lightbox-content .lightbox-controls-right:hover {
-		  color: white;
-		  background: black;
-		  transition: background 1s;
-		}
-
-		.lightbox-content img {
-			flex-shrink: 2;
-			flex-grow: 0;
-			object-fit: scale-down;
-			display: block;
-			max-width: 100%;
-			width: 100%;
-			max-height: 100%;
-		}
-
-		.lightbox-content p {
-			flex-grow: 2;
-			flex-shrink: 0;
-			flex-basis: content;
-			margin: 0;
-			padding: 1em;
-		}
 
 
                     `}
                                     </style>
 
                                 </Gallery>
+
                             </React.Fragment>
                         )
                     } else {
