@@ -28,11 +28,13 @@ export default class Lightbox extends React.Component {
                         </div>
                     </div>
                     <div className="image-wrapper">
-                        <img key={this.props.bilde._id} src={builder.image(this.props.bilde.image).url()}/>
+                        <img key={this.props.bilde._id} src={builder.image(this.props.bilde.image).url()} onClick={this.props.onCloseRequested}/>
                     </div>
                     <p className={"lightbox-image-caption"}>{this.props.bilde.name}
                         <span className="latin">{this.props.bilde.latin && (` (${this.props.bilde.latin})`)}</span>
                     </p>
+                    <div className='lightbox-controls lightbox-controls-bottom'>
+                    </div>
                 </div>
                 <div className={'lightbox-controls lightbox-controls-right'}>
                     <span className={'button'}>
@@ -53,13 +55,14 @@ export default class Lightbox extends React.Component {
 			flex-direction: row;
 			flex-shrink: 1;
 			flex-grow: 1;
-			height: 100vh;
-			max-height: 100vh;
 			position: fixed;
 			background-image: url(static/whitey-bakgrunn.png);
-			top: 0;
-			left: 0;
-			width: 100%;
+			top: 5vh;
+			bottom: 10vh;
+			left: 10vw;
+			right: 10vw;
+			border: 2px inset black;
+			box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 		}
 
 		.lightbox-content .lightbox-center-column {
@@ -78,18 +81,22 @@ export default class Lightbox extends React.Component {
 		   font-weight: bold;
 		}
 
-		.lightbox-content .lightbox-controls-row {
+		.lightbox-content .lightbox-controls-row, .lightbox-content .lightbox-controls-bottom {
 		  display: flex;
 		  flex-direction: row;
 			flex-grow: 0;
 			flex-shrink: 0;
 			flex-basis: content;
 		  justify-content: flex-end;
-		  height: 1em;
+		  height: 0.5em;
 		  box-sizing: content-box;
 		  background: linear-gradient(lightgray, transparent);
 		  color: lightgray;
 		  padding: 1em;
+		}
+
+		.lightbox-content .lightbox-controls-bottom {
+		  background: linear-gradient(to top, lightgray, transparent);
 		}
 
         .lightbox-content .image-wrapper {
@@ -106,17 +113,17 @@ export default class Lightbox extends React.Component {
 			object-fit: contain;
 			display: block;
 			max-width: 100%;
-		    max-height: calc(100vh - 4em);
+		    max-height: calc(100vh - 5em - 5em);
 		}
 
 
 
 		.lightbox-content .lightbox-controls-left {
-		  background: linear-gradient(to right, lightgray, transparent), linear-gradient(to bottom, lightgray, transparent 2em);
+		  background: linear-gradient(to right, lightgray, transparent), linear-gradient(to bottom, lightgray, transparent 2em), linear-gradient(to top, lightgray, transparent 2em);
 		}
 
 		.lightbox-content .lightbox-controls-right {
-		  background: linear-gradient(to left, lightgray, transparent), linear-gradient(to bottom, lightgray, transparent 2em);
+		  background: linear-gradient(to left, lightgray, transparent), linear-gradient(to bottom, lightgray, transparent 2em), linear-gradient(to top, lightgray, transparent 2em);
 		}
 
 		.lightbox-content .lightbox-controls-row, .lightbox-content .lightbox-controls-left, .lightbox-content .lightbox-controls-right {
@@ -135,6 +142,8 @@ export default class Lightbox extends React.Component {
 			flex-basis: content;
 			margin: 0;
 			padding: 1em;
+			font-size: 18pt;
+			font-weight: bold;
 		}
 		 `}
                 </style>

@@ -43,7 +43,7 @@ export default class Gallery extends Component {
             {this.props.children}
             <style jsx>{`
             .gallery-image-holder:target {
-               border: 2px solid red !important;
+               box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
             }
             `}</style>
         </ul>);
