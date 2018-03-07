@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import imageUrlBuilder from '@sanity/image-url'
 import santiyClient from '../lib/sanity';
 const builder = imageUrlBuilder(santiyClient);
@@ -7,21 +8,21 @@ const builder = imageUrlBuilder(santiyClient);
 export default class Lightbox extends React.Component {
 
     render() {
-        return (
-            <div className={'lightbox-content'}>
+        return this.props.open && (
+            <div className={classnames('lightbox-content')}>
                 <div className={'lightbox-controls lightbox-controls-left'}>
                     <span className={'button'}>
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="20"
-     height="34">
-    <path d="m 19,3 -2,-2 -16,16 16,16 1,-1 -15,-15 15,-15 z"/>
-</svg>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="20"
+                             height="34">
+                            <path d="m 19,3 -2,-2 -16,16 16,16 1,-1 -15,-15 15,-15 z"/>
+                        </svg>
                     </span>
                 </div>
                 <div className={'lightbox-center-column'}>
 
                     <div className={'lightbox-controls lightbox-controls-row'}>
-                        <div className={'close-button'} onClick={this.closeLightbox}>
+                        <div className={'close-button'} onClick={this.props.onCloseRequested}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="m 1,3 1.25,-1.25 7.5,7.5 7.5,-7.5 1.25,1.25 -7.5,7.5 7.5,7.5 -1.25,1.25 -7.5,-7.5 -7.5,7.5 -1.25,-1.25 7.5,-7.5 -7.5,-7.5 z"/>
                             </svg>
                         </div>
@@ -38,8 +39,8 @@ export default class Lightbox extends React.Component {
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="20"
                              height="34">
-    <path d="m 1,3 2,-2 16,16 -16,16 -1,-1 15,-15 -15,-15 z"/>
-</svg>
+                            <path d="m 1,3 2,-2 16,16 -16,16 -1,-1 15,-15 -15,-15 z"/>
+                        </svg>
                     </span>
                 </div>
                 <style jsx>{`
@@ -138,10 +139,16 @@ export default class Lightbox extends React.Component {
 		 `}
                 </style>
             </div>
-        )
+        ) || null
     }
 }
 
 Lightbox.propTypes = {
-    bilde: PropTypes.object
+    bilde: PropTypes.object,
+    open: PropTypes.bool,
+    onCloseRequested: PropTypes.func
+};
+
+Lightbox.defaultProps = {
+    open: true
 };

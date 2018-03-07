@@ -73,9 +73,10 @@ class Index extends React.Component {
                                         <p className={"image-caption"}>{bilde.name}
                                             <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
                                         </p>
-                                        {idx === 0 && <Lightbox bilde={bilde}/>}
                                     </React.Fragment>
                                 ))}>
+                                    {this.state.fullsizeImageIdxShowing !== undefined &&
+                                    <Lightbox bilde={props.node.bilder[this.state.fullsizeImageIdxShowing]} onCloseRequested={this.closeLightbox}/>}
                                     <style jsx>{`
                   :global(.galleri) {
                     display: flex;
@@ -144,10 +145,13 @@ class Index extends React.Component {
     }
 
     closeLightbox() {
+        this.setState({fullsizeImageIdxShowing : undefined});
+/*
         window.setTimeout(() => {
             window.location.hash = "";
         }, 1);
 
+*/
     }
 
     componentDidMount() {
