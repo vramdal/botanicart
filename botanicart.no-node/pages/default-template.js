@@ -67,7 +67,7 @@ class Index extends React.Component {
                         return (
                             <React.Fragment>
                                 <Gallery className={'galleri'} onGalleryFrameSelect={this.onGalleryFrameSelect.bind(this)} framesClassName={'galleri-bilde'} key={props.node._key}
-                                         frames={props.node.bilder.map((bilde, idx) => (
+                                         frames={props.node.bilder.map((bilde) => (
                                     <React.Fragment key={bilde.slug.current}>
                                         <img key={bilde._id} src={builder.image(bilde.image).height(150).url()}/>
                                         <p className={"image-caption"}>{bilde.name}
@@ -76,7 +76,7 @@ class Index extends React.Component {
                                     </React.Fragment>
                                 ))}>
                                     {this.state.fullsizeImageIdxShowing !== undefined &&
-                                    <Lightbox bilde={props.node.bilder[this.state.fullsizeImageIdxShowing]} onCloseRequested={this.closeLightbox}/>}
+                                    <Lightbox bilde={props.node.bilder[this.state.fullsizeImageIdxShowing]} onCloseRequested={this.closeLightbox} onNavigateRequested={this.navigateLightbox.bind(this, props.node.bilder)}/>}
                                     <style jsx>{`
                   :global(.galleri) {
                     display: flex;
@@ -152,6 +152,14 @@ class Index extends React.Component {
         }, 1);
 
 */
+    }
+
+    navigateLightbox(images, delta) {
+        let next = (this.state.fullsizeImageIdxShowing + delta) % images.length;
+        if (next < 0) {
+            next = images.length - 1;
+        }
+        this.setState({fullsizeImageIdxShowing: next});
     }
 
     componentDidMount() {

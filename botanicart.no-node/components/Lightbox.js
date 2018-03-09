@@ -11,7 +11,7 @@ export default class Lightbox extends React.Component {
         return this.props.open && (
             <div className={classnames('lightbox-content')}>
                 <div className={'lightbox-controls lightbox-controls-left'}>
-                    <span className={'button'}>
+                    <span className={'button'} onClick={() => this.props.onNavigateRequested(-1)}>
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="20"
                              height="34">
@@ -37,7 +37,7 @@ export default class Lightbox extends React.Component {
                     </div>
                 </div>
                 <div className={'lightbox-controls lightbox-controls-right'}>
-                    <span className={'button'}>
+                    <span className={'button'} onClick={() => this.props.onNavigateRequested(+1)}>
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="20"
                              height="34">
@@ -155,7 +155,8 @@ export default class Lightbox extends React.Component {
 Lightbox.propTypes = {
     bilde: PropTypes.object,
     open: PropTypes.bool,
-    onCloseRequested: PropTypes.func
+    onCloseRequested: PropTypes.func,
+    onNavigateRequested: PropTypes.func
 };
 
 Lightbox.defaultProps = {
