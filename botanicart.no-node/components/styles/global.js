@@ -92,5 +92,12 @@ export default css`
         font-weight: normal;
         font-style: normal;
     }
+    
+    @font-face {
+        font-family: 'Gabriola';
+        url('static/harabarahand-webfont.ttf') format('truetype'),
+        font-weight: normal;
+        font-style: normal;
+    }
 )
 `
