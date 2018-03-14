@@ -11,20 +11,20 @@ export default css`
         background: #fbeed5 url('static/whitey-bakgrunn.png') repeat;
     }
 
-    body.frontpage, body.artikkel {
+    body.frontpage, body.pagetype-artikkel {
         background: url(static/caprifol-bakgrunn.png), url(static/rognebaer-bakgrunn.png), url(static/whitey-bakgrunn.png);
         min-height: 750px;
         background-repeat: no-repeat, no-repeat, repeat;
         background-position: 80% 50px, 20% 100px, left top;
     }
     
-    body.artikkel p {
+    body.pagetype-artikkel .content > p {
         font-family: Gabriola, Verdana, Tahoma, cursive;
         text-align: left;
         font-size: 14pt;
     }
     
-    body.artikkel .content {
+    body.pagetype-artikkel .content {
       min-height: 350px;
       border: 3px double #626262;
       margin: 5px;
@@ -32,7 +32,7 @@ export default css`
       background-color: white;
     }
 
-    body.artikkel .content p:first-of-type:first-letter {
+    body.pagetype-artikkel .content > p:first-of-type:first-letter {
       font-family: Tangerine, Verdana, Tahoma, cursive;
       display: block;
       font-size: 64pt;
