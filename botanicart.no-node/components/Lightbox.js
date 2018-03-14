@@ -7,6 +7,31 @@ const builder = imageUrlBuilder(santiyClient);
 
 export default class Lightbox extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.handleKey = this.handleKey.bind(this);
+    }
+
+    componentDidMount() {
+        this.keyEventHandler = window.addEventListener("keyup", this.handleKey, true);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("keyup", this.handleKey, true);
+    }
+
+    handleKey(evt) {
+        if (this.props.open) {
+            if (evt.key === "ArrowRight") {
+                this.props.onNavigateRequested(+1);
+            } else if (evt.key === "ArrowLeft") {
+                this.props.onNavigateRequested(-1);
+            } else if (evt.key === "Escape") {
+                this.props.onCloseRequested();
+            }
+        }
+    }
+
     render() {
         return this.props.open && (
             <div className={classnames('lightbox-content')}>
