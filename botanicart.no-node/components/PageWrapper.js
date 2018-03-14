@@ -31,7 +31,7 @@ export default (WrappedPage, queries) =>
             return {
                 menypunkter: await sanity.fetch(menyQuery), pathname, ...await this.resolveQueries(queries), path: asPath, pageContent: res.resolvedContent.page,
                 aktivSideSlug: res.resolvedContent.page.slug,
-                bodyClass: (res.resolvedContent.page.slug) === '' ? 'forside' : undefined
+                bodyClass: res.resolvedContent.page.sidetype
             }
         }
         render() {

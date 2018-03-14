@@ -2,7 +2,7 @@ const sanity = require('./lib/sanity');
 
 const { parse } = require('url');
 
-const pageQuery = `*[_type=="side" && slug.current == $slug][0] {'slug': slug.current, tittel, tekst[]{..., 'bilder': bilder[]->{...}}}`;
+const pageQuery = `*[_type=="side" && slug.current == $slug][0] {'slug': slug.current, tittel, sidetype, tekst[]{..., 'bilder': bilder[]->{...}}}`;
 
 async function resolvePage(req) {
     const parsedUrl = parse(req.url, true);

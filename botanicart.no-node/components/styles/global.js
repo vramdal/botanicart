@@ -11,11 +11,37 @@ export default css`
         background: #fbeed5 url('static/whitey-bakgrunn.png') repeat;
     }
 
-    body.frontpage, body.has-article {
+    body.frontpage, body.artikkel {
         background: url(static/caprifol-bakgrunn.png), url(static/rognebaer-bakgrunn.png), url(static/whitey-bakgrunn.png);
         min-height: 750px;
         background-repeat: no-repeat, no-repeat, repeat;
         background-position: 80% 50px, 20% 100px, left top;
+    }
+    
+    body.artikkel p {
+        font-family: Gabriola, Verdana, Tahoma, cursive;
+        text-align: left;
+        font-size: 14pt;
+    }
+    
+    body.artikkel .content {
+      min-height: 350px;
+      border: 3px double #626262;
+      margin: 5px;
+      padding: 3em;
+      background-color: white;
+    }
+
+    body.artikkel .content p:first-of-type:first-letter {
+      font-family: Tangerine, Verdana, Tahoma, cursive;
+      display: block;
+      font-size: 64pt;
+      float: left;
+      vertical-align: top;
+      color: olive;
+      padding-bottom: 0;
+      height: 50pt;
+      padding-right: 0.3em;
     }
 
     ul.menu li a, ul.menu li a:visited, .image-frame a {

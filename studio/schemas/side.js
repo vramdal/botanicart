@@ -9,6 +9,15 @@ export default {
             type: "string"
         },
         {
+            name: "sidetype",
+            title: "Sidetype",
+            type: "string",
+            options: {
+                list: ['artikkel', 'galleri', 'forside'],
+                layout: "radio"
+            }
+        },
+        {
             name: "menypunkttekst",
             title: "Menypunkt-tekst",
             type: "string",
