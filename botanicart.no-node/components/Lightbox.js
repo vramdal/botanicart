@@ -105,6 +105,7 @@ export default class Lightbox extends React.Component {
             flex: 1 1 auto;
 			justify-content: center;
 			align-items: center;
+			height: calc(100vh - 20em);
          }
 
          .lightbox-content img {
