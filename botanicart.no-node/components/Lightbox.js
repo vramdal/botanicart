@@ -13,11 +13,25 @@ export default class Lightbox extends React.Component {
     }
 
     componentDidMount() {
+        console.log("componentDidMount");
         this.keyEventHandler = window.addEventListener("keyup", this.handleKey, true);
     }
 
     componentWillUnmount() {
+        console.log("componentWillUnmount");
         window.removeEventListener("keyup", this.handleKey, true);
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log("componentWillUpdate");
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log("componentDidUpdate");
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log("componentWillReceiveProps bilde ", nextProps.bilde);
     }
 
     handleKey(evt) {
@@ -36,6 +50,7 @@ export default class Lightbox extends React.Component {
         return this.props.open && (
             <React.Fragment>
                 <div className={classnames('backdrop')} onClick={this.props.onCloseRequested}>
+                    { /*language=SCSS*/ }
                     <style jsx>{`
                       div {
                         position: fixed;
@@ -45,7 +60,6 @@ export default class Lightbox extends React.Component {
                         right: 0;
                         background-image: url(static/overlay.png);
                       }
-
                     `}</style>
                 </div>
                 <div className={classnames('lightbox-content')}>
