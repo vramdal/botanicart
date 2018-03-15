@@ -19,6 +19,9 @@ class Index extends React.Component {
         super();
         this.state = {fullsizeImageIdxShowing : undefined};
         this.closeLightbox = this.closeLightbox.bind(this);
+        this.lightboxImageUrlBuilder = this.lightboxImageUrlBuilder.bind(this);
+        this.lightboxImageCaptionProvider = this.lightboxImageCaptionProvider.bind(this);
+
     }
 
     serializers(){
@@ -76,7 +79,14 @@ class Index extends React.Component {
                                     </React.Fragment>
                                 ))}>
                                     {this.state.fullsizeImageIdxShowing !== undefined &&
-                                    <Lightbox bilde={props.node.bilder[this.state.fullsizeImageIdxShowing]} onCloseRequested={this.closeLightbox} onNavigateRequested={this.navigateLightbox.bind(this, props.node.bilder)}/>}
+                                    <Lightbox bilde={props.node.bilder[this.state.fullsizeImageIdxShowing]}
+                                              imageUrlBuilder={this.lightboxImageUrlBuilder}
+                                              imageCaptionProvider={this.lightboxImageCaptionProvider}
+                                              nesteBilde={props.node.bilder[this.state.fullsizeImageIdxShowing + 1]}
+                                              forrigeBilde={props.node.bilder[this.state.fullsizeImageIdxShowing - 1]}
+                                              onCloseRequested={this.closeLightbox}
+                                              onNavigateRequested={this.navigateLightbox.bind(this, props.node.bilder)}
+                                    />}
                                     <style jsx>{`
                   :global(.galleri) {
                     display: flex;
@@ -142,6 +152,19 @@ class Index extends React.Component {
     onGalleryFrameSelect(frame, idx) {
         console.log("Index.onGalleryFrameSelect", arguments);
         this.setState({fullsizeImageIdxShowing : idx});
+    }
+
+    lightboxImageUrlBuilder(bilde) {
+        return builder.image(bilde.image).url();
+    }
+
+    lightboxImageCaptionProvider(bilde) {
+        return (
+            <React.Fragment>
+                {bilde.name}
+                <span className="latin">{bilde.latin && (` (${bilde.latin})`)}</span>
+            </React.Fragment>
+        );
     }
 
     closeLightbox() {

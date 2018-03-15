@@ -34,8 +34,22 @@ export default class Lightbox extends React.Component {
 
     render() {
         return this.props.open && (
-            <div className={classnames('lightbox-content')}>
-                <div className={'lightbox-controls lightbox-controls-left'}>
+            <React.Fragment>
+                <div className={classnames('backdrop')} onClick={this.props.onCloseRequested}>
+                    <style jsx>{`
+                      div {
+                        position: fixed;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        background-image: url(static/overlay.png);
+                      }
+
+                    `}</style>
+                </div>
+                <div className={classnames('lightbox-content')}>
+                    <div className={'lightbox-controls lightbox-controls-left'}>
                     <span className={'button'} onClick={() => this.props.onNavigateRequested(-1)}>
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="20"
@@ -43,25 +57,29 @@ export default class Lightbox extends React.Component {
                             <path d="m 19,3 -2,-2 -16,16 16,16 1,-1 -15,-15 15,-15 z"/>
                         </svg>
                     </span>
-                </div>
-                <div className={'lightbox-center-column'}>
+                    </div>
+                    <div className={'lightbox-center-column'}>
 
-                    <div className={'lightbox-controls lightbox-controls-row'}>
-                        <div className={'close-button'} onClick={this.props.onCloseRequested}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="m 1,3 1.25,-1.25 7.5,7.5 7.5,-7.5 1.25,1.25 -7.5,7.5 7.5,7.5 -1.25,1.25 -7.5,-7.5 -7.5,7.5 -1.25,-1.25 7.5,-7.5 -7.5,-7.5 z"/>
-                            </svg>
+                        <div className={'lightbox-controls lightbox-controls-row'}>
+                            <div className={'close-button'} onClick={this.props.onCloseRequested}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="m 1,3 1.25,-1.25 7.5,7.5 7.5,-7.5 1.25,1.25 -7.5,7.5 7.5,7.5 -1.25,1.25 -7.5,-7.5 -7.5,7.5 -1.25,-1.25 7.5,-7.5 -7.5,-7.5 z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="image-wrapper">
+                            <img key={this.props.bilde._id} src={this.props.imageUrlBuilder(this.props.bilde)} onClick={this.props.onCloseRequested}/>
+                        </div>
+                        <div className="hidden-images">
+                            {this.props.nesteBilde && <img key={this.props.nesteBilde._id} src={this.props.imageUrlBuilder(this.props.nesteBilde)} onClick={this.props.onCloseRequested}/>}
+                            {this.props.forrigeBilde && <img key={this.props.forrigeBilde._id} src={this.props.imageUrlBuilder(this.props.forrigeBilde)} onClick={this.props.onCloseRequested}/>}
+                        </div>
+                        <p className={"lightbox-image-caption"}>
+                            {this.props.imageCaptionProvider(this.props.bilde)}
+                        </p>
+                        <div className='lightbox-controls lightbox-controls-bottom'>
                         </div>
                     </div>
-                    <div className="image-wrapper">
-                        <img key={this.props.bilde._id} src={builder.image(this.props.bilde.image).url()} onClick={this.props.onCloseRequested}/>
-                    </div>
-                    <p className={"lightbox-image-caption"}>{this.props.bilde.name}
-                        <span className="latin">{this.props.bilde.latin && (` (${this.props.bilde.latin})`)}</span>
-                    </p>
-                    <div className='lightbox-controls lightbox-controls-bottom'>
-                    </div>
-                </div>
-                <div className={'lightbox-controls lightbox-controls-right'}>
+                    <div className={'lightbox-controls lightbox-controls-right'}>
                     <span className={'button'} onClick={() => this.props.onNavigateRequested(+1)}>
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="20"
@@ -69,10 +87,15 @@ export default class Lightbox extends React.Component {
                             <path d="m 1,3 2,-2 16,16 -16,16 -1,-1 15,-15 -15,-15 z"/>
                         </svg>
                     </span>
-                </div>
-                <style jsx>{`
+                    </div>
+                    <style jsx>{`
         :global(li:target .lightbox-content) {
           display: flex;
+        }
+
+        .hidden-images {
+          visibility: hidden;
+          position: absolute;
         }
 
 		.lightbox-content {
@@ -172,17 +195,22 @@ export default class Lightbox extends React.Component {
 			font-weight: bold;
 		}
 		 `}
-                </style>
-            </div>
+                    </style>
+                </div>
+            </React.Fragment>
         ) || null
     }
 }
 
 Lightbox.propTypes = {
     bilde: PropTypes.object,
+    nesteBilde: PropTypes.object,
+    forrigeBilde: PropTypes.object,
     open: PropTypes.bool,
     onCloseRequested: PropTypes.func,
-    onNavigateRequested: PropTypes.func
+    onNavigateRequested: PropTypes.func,
+    imageUrlBuilder: PropTypes.func,
+    imageCaptionProvider: PropTypes.func,
 };
 
 Lightbox.defaultProps = {
