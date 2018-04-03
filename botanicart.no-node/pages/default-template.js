@@ -84,6 +84,7 @@ class Index extends React.Component {
                                               imageCaptionProvider={this.lightboxImageCaptionProvider}
                                               nesteBilde={props.node.bilder[this.state.fullsizeImageIdxShowing + 1]}
                                               forrigeBilde={props.node.bilder[this.state.fullsizeImageIdxShowing - 1]}
+                                              navigated={this.state.navigated}
                                               onCloseRequested={this.closeLightbox}
                                               key={'lightbox-1'}
                                               onNavigateRequested={this.navigateLightbox.bind(this, props.node.bilder)}
@@ -183,7 +184,7 @@ class Index extends React.Component {
         if (next < 0) {
             next = images.length - 1;
         }
-        this.setState({fullsizeImageIdxShowing: next});
+        this.setState({fullsizeImageIdxShowing: next, navigated: delta});
     }
 
     componentDidMount() {

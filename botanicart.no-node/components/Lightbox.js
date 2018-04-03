@@ -48,7 +48,7 @@ export default class Lightbox extends React.Component {
 
                     `}</style>
                 </div>
-                <div className={classnames('lightbox-content')}>
+                <div className={classnames('lightbox-content', {'navigated': this.props.navigated !== undefined, 'navigated-forward': this.props.navigated > 0, 'navigated-backward': this.props.navigated < 0})}>
                     <div className={'lightbox-controls lightbox-controls-left'}>
                     <span className={'button'} onClick={() => this.props.onNavigateRequested(-1)}>
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,9 @@ export default class Lightbox extends React.Component {
                             </div>
                         </div>
                         <div className="image-wrapper">
+                            {this.props.navigated < 0 && this.props.nesteBilde && <img className={"navigated-from"} key={this.props.nesteBilde._id} src={this.props.imageUrlBuilder(this.props.nesteBilde)} onClick={this.props.onCloseRequested}/>}
                             <img key={this.props.bilde._id} src={this.props.imageUrlBuilder(this.props.bilde)} onClick={this.props.onCloseRequested}/>
+                            {this.props.navigated > 0 && this.props.forrigeBilde && <img  className={"navigated-from"} key={this.props.forrigeBilde._id} src={this.props.imageUrlBuilder(this.props.forrigeBilde)} onClick={this.props.onCloseRequested}/>}
                         </div>
                         <div className="hidden-images">
                             {this.props.nesteBilde && <img key={this.props.nesteBilde._id} src={this.props.imageUrlBuilder(this.props.nesteBilde)} onClick={this.props.onCloseRequested}/>}
@@ -149,12 +151,29 @@ export default class Lightbox extends React.Component {
 
         .lightbox-content .image-wrapper {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             flex: 1 1 auto;
 			justify-content: center;
 			align-items: center;
 			height: calc(100vh - 20em);
          }
+
+         .lightbox-content .image-wrapper img {
+            animation-duration: 3s;
+            animation-name: slidein;
+         }
+
+         @keyframes slidein {
+             from {
+                margin-left: 100%;
+                width: 300%;
+             }
+
+             to {
+                margin-left: 0%;
+                width: 100%;
+            }
+        }
 
          .lightbox-content img {
 			flex-shrink: 1;
@@ -211,6 +230,7 @@ Lightbox.propTypes = {
     onNavigateRequested: PropTypes.func,
     imageUrlBuilder: PropTypes.func,
     imageCaptionProvider: PropTypes.func,
+    navigated: PropTypes.number
 };
 
 Lightbox.defaultProps = {
