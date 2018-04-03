@@ -21,10 +21,10 @@ class Index extends React.Component {
         this.closeLightbox = this.closeLightbox.bind(this);
         this.lightboxImageUrlBuilder = this.lightboxImageUrlBuilder.bind(this);
         this.lightboxImageCaptionProvider = this.lightboxImageCaptionProvider.bind(this);
-
+        this.serializers = this.createSerializers();
     }
 
-    serializers(){
+    createSerializers(){
 
         return {
             types: {
@@ -85,6 +85,7 @@ class Index extends React.Component {
                                               nesteBilde={props.node.bilder[this.state.fullsizeImageIdxShowing + 1]}
                                               forrigeBilde={props.node.bilder[this.state.fullsizeImageIdxShowing - 1]}
                                               onCloseRequested={this.closeLightbox}
+                                              key={'lightbox-1'}
                                               onNavigateRequested={this.navigateLightbox.bind(this, props.node.bilder)}
                                     />}
                                     <style jsx>{`
@@ -141,7 +142,7 @@ class Index extends React.Component {
     render() {
         return (<Layout menypunkter={this.props.menypunkter} aktivSideSlug={this.props.aktivSideSlug}>
             {this.props.pageContent.tekst && this.props.pageContent.tekst.map(tekstblokk => (
-                <BlockContent key={tekstblokk._key} blocks={tekstblokk} serializers={this.serializers()}/>
+                <BlockContent key={tekstblokk._key} blocks={tekstblokk} serializers={this.serializers}/>
             ))}
             <Head>
             </Head>
