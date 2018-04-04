@@ -67,9 +67,9 @@ export default class Lightbox extends React.Component {
                             </div>
                         </div>
                         <div className="image-wrapper">
-                            {this.props.navigated < 0 && this.props.nesteBilde && <img className={"navigated-from"} key={this.props.nesteBilde._id} src={this.props.imageUrlBuilder(this.props.nesteBilde)} onClick={this.props.onCloseRequested}/>}
-                            <img key={this.props.bilde._id} src={this.props.imageUrlBuilder(this.props.bilde)} onClick={this.props.onCloseRequested}/>
-                            {this.props.navigated > 0 && this.props.forrigeBilde && <img  className={"navigated-from"} key={this.props.forrigeBilde._id} src={this.props.imageUrlBuilder(this.props.forrigeBilde)} onClick={this.props.onCloseRequested}/>}
+                            {this.props.navigated > 0 && this.props.forrigeBilde && <img  className={"navigated-from exit-left"} key={this.props.forrigeBilde._id} src={this.props.imageUrlBuilder(this.props.forrigeBilde)} onClick={this.props.onCloseRequested}/>}
+                            <img key={this.props.bilde._id} className={classnames({'entry-left': this.props.navigated < 0, 'entry-right': this.props.navigated > 0})} src={this.props.imageUrlBuilder(this.props.bilde)} onClick={this.props.onCloseRequested}/>
+                            {this.props.navigated < 0 && this.props.nesteBilde && <img className={"navigated-from exit-right"} key={this.props.nesteBilde._id} src={this.props.imageUrlBuilder(this.props.nesteBilde)} onClick={this.props.onCloseRequested}/>}
                         </div>
                         <div className="hidden-images">
                             {this.props.nesteBilde && <img key={this.props.nesteBilde._id} src={this.props.imageUrlBuilder(this.props.nesteBilde)} onClick={this.props.onCloseRequested}/>}
@@ -158,22 +158,42 @@ export default class Lightbox extends React.Component {
 			height: calc(100vh - 20em);
          }
 
-         .lightbox-content .image-wrapper img {
-            animation-duration: 3s;
-            animation-name: slidein;
+         .lightbox-content .image-wrapper img.navigated-from {
          }
 
-         @keyframes slidein {
-             from {
-                margin-left: 100%;
-                width: 300%;
-             }
+         .exit-left, .exit-right, .entry-left, .entry-right {
+            animation-duration: 1s;
+            animation-timing-function: ease-out;
+         }
 
-             to {
-                margin-left: 0%;
-                width: 100%;
-            }
-        }
+         .exit-right, .exit-left {
+           animation-fill-mode: forwards;
+         }
+
+         .entry-left, .entry-right {
+           animation-fill-mode: forwards;
+         }
+
+         .exit-left {
+            animation-name: exit-left;
+         }
+
+         .exit-right {
+            animation-name: exit-right;
+         }
+
+         .entry-left {
+            animation-name: entry-left;
+         }
+
+         .entry-right {
+            animation-name: entry-right;
+         }
+
+         @keyframes exit-right { from { opacity: 1; width: 100%; filter: saturate(1); transform: rotateY(0deg); } to { opacity: 0; width: 0%; filter: saturate(0); transform: rotateY(90deg); } }
+         @keyframes exit-left { from { opacity: 1; width: 100%; filter: saturate(1); transform: rotateY(0deg); } to { opacity: 0; width: 0%; ; filter: saturate(0); transform: rotateY(90deg); } }
+         @keyframes entry-right { from { opacity: 0;  width: 0%; filter: saturate(0); transform: rotateY(90deg); } to { opacity: 1;  width: 100%;; filter: saturate(1); transform: rotateY(0deg); } }
+         @keyframes entry-left { from { opacity: 0; width: 0%; filter: saturate(0); transform: rotateY(90deg); } to { opacity: 1; width: 100%; filter: saturate(1); transform: rotateY(0deg); } }
 
          .lightbox-content img {
 			flex-shrink: 1;

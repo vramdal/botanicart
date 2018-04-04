@@ -153,7 +153,7 @@ class Index extends React.Component {
 
     onGalleryFrameSelect(frame, idx) {
         console.log("Index.onGalleryFrameSelect", arguments);
-        this.setState({fullsizeImageIdxShowing : idx});
+        this.setState({fullsizeImageIdxShowing : idx, navigated: undefined});
     }
 
     lightboxImageUrlBuilder(bilde) {
