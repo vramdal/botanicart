@@ -1,5 +1,6 @@
 // @flow
 
+import "core-js/library/fn/object/assign";
 import Layout from '../components/Layout';
 import PageWrapper from '../components/PageWrapper';
 import BlockContent from '@sanity/block-content-to-react';

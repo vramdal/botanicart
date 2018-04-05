@@ -14,6 +14,7 @@ const handle = app.getRequestHandler();
 const resolvePage = require ('./PageResolve');
 
 app.prepare().then(() => {
+    let port = process.env.PORT || 3000;
     createServer((req, res) => {
 
 
@@ -42,8 +43,8 @@ app.prepare().then(() => {
         } else {
             handle(req, res, parsedUrl)
         }*/
-    }).listen(3000, err => {
-        if (err) throw err
-        console.log('> Ready on http://localhost:3000')
+    }).listen(port, err => {
+        if (err) throw err;
+        console.log('> Ready on http://localhost:' + port)
     })
-})
+});
