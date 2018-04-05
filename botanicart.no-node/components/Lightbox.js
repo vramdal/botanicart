@@ -155,7 +155,7 @@ export default class Lightbox extends React.Component {
             flex: 1 1 auto;
 			justify-content: center;
 			align-items: center;
-			height: calc(100vh - 20em);
+			height: calc(100vh - 10em);
          }
 
          .lightbox-content .image-wrapper img.navigated-from {
@@ -201,7 +201,7 @@ export default class Lightbox extends React.Component {
 			object-fit: contain;
 			display: block;
 			max-width: 100%;
-		    max-height: calc(100vh - 5em - 5em);
+		    max-height: calc(100vh - 20em);
 		}
 
 
