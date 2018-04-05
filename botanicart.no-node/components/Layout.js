@@ -11,6 +11,9 @@ export default class Layout extends React.Component {
         return (
             <div>
                 <Head>
+                    <script
+                        type='text/javascript'
+                        src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.20.0/polyfill.min.js' />
                     <link rel="icon" href="static/kvitveis-markor.png" type="image/png"/>
                     {this.props.aktivSideSlug === '' &&
                     <style>{`

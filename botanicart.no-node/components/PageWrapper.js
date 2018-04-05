@@ -26,8 +26,12 @@ export default (WrappedPage, queries) =>
                 return resultMap;
             }
         }
+        // noinspection JSUnusedGlobalSymbols
         static async getInitialProps({ pathname, asPath, res }) {
             // https://github.com/sanity-io/block-content-to-react
+            if (!res) {
+                throw new Error("Serveren sendte ikke noe svar");
+            }
             return {
                 menypunkter: await sanity.fetch(menyQuery), pathname, ...await this.resolveQueries(queries), path: asPath, pageContent: res.resolvedContent.page,
                 aktivSideSlug: res.resolvedContent.page.slug,
