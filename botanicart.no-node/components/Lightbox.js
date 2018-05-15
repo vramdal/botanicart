@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import imageUrlBuilder from '@sanity/image-url'
 import santiyClient from '../lib/sanity';
+import objectFitImages from 'object-fit-images';
 const builder = imageUrlBuilder(santiyClient);
 
 export default class Lightbox extends React.Component {
@@ -14,6 +15,11 @@ export default class Lightbox extends React.Component {
 
     componentDidMount() {
         this.keyEventHandler = window.addEventListener("keyup", this.handleKey, true);
+        objectFitImages(".image-wrapper img");
+    }
+
+    componentDidUpdate() {
+        objectFitImages(".image-wrapper img");
     }
 
     componentWillUnmount() {
@@ -68,7 +74,7 @@ export default class Lightbox extends React.Component {
                         </div>
                         <div className="image-wrapper">
                             {this.props.navigated > 0 && this.props.forrigeBilde && <img  className={"navigated-from exit-left"} key={this.props.forrigeBilde._id} src={this.props.imageUrlBuilder(this.props.forrigeBilde)} onClick={this.props.onCloseRequested}/>}
-                            <img key={this.props.bilde._id} className={classnames({'entry-left': this.props.navigated < 0, 'entry-right': this.props.navigated > 0})} src={this.props.imageUrlBuilder(this.props.bilde)} onClick={this.props.onCloseRequested}/>
+                            <img key={this.props.bilde._id} className={classnames('current-image', {'entry-left': this.props.navigated < 0, 'entry-right': this.props.navigated > 0})} src={this.props.imageUrlBuilder(this.props.bilde)} onClick={this.props.onCloseRequested}/>
                             {this.props.navigated < 0 && this.props.nesteBilde && <img className={"navigated-from exit-right"} key={this.props.nesteBilde._id} src={this.props.imageUrlBuilder(this.props.nesteBilde)} onClick={this.props.onCloseRequested}/>}
                         </div>
                         <div className="hidden-images">
@@ -199,6 +205,7 @@ export default class Lightbox extends React.Component {
 			flex-shrink: 1;
 			flex-grow: 1;
 			object-fit: contain;
+			font-family: 'object-fit: contain;';
 			display: block;
 			max-width: 100%;
 		    max-height: calc(100vh - 20em);
